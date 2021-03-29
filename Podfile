@@ -6,6 +6,7 @@ target 'YouTubeApp' do
   use_frameworks!
 
   # Pods for YouTubeApp
+  pod 'Alamofire', '~> 5.2'
 
   target 'YouTubeAppTests' do
     inherit! :search_paths
