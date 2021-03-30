@@ -6,14 +6,22 @@
 //
 
 import UIKit
+import Alamofire
 
 // Youtube検索結果を管理するクラス
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
 
     // MARK: - プロパティ
     // tableViewのインスタンス
     @IBOutlet weak var youTubeTable: UITableView!
+    
+    // 検索バーのインスタンス
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    // APIへのアクセスキー
+    // YouTubeAPIは q="検索ワード", &=情報の繋げ役, key= youTubeAPIKey, 必須パラメーターpart= snipeet
+    var youTubeAPIKey = "AIzaSyAAMmYlyBkUeVtBpagqXAQoPgOJ9-HAtmg"
     
     
     override func viewDidLoad() {
@@ -22,6 +30,48 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         // デリゲートの委託
         youTubeTable.delegate   = self
         youTubeTable.dataSource = self
+        searchBar.delegate      = self
+        
+        // キーボードにツールバーを反映
+        createToolbar()
+        
+        // 検索情報（仮）
+        let searchURL = "https://www.googleapis.com/youtube/v3/search?q=baseball&key=AIzaSyAAMmYlyBkUeVtBpagqXAQoPgOJ9-HAtmg&part=snippet"
+        
+        // APIに送信するリクエスト
+        let request = AF.request(searchURL)
+        
+        // リクエストを受けとる
+        request.responseJSON {
+            (response) in
+            
+            print("response: \(response)")
+        }
+    }
+    
+    
+    // MARK: - キーボードにツールバーを追加
+    // "閉じる", "検索"ボタンをキーボードに追加
+    func createToolbar() {
+        
+        // ツールバーを作成
+        let toolbar = UIToolbar()
+            toolbar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
+        
+        // 余白用アイテム
+        let flexibleItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        
+        // "閉じる"ボタンを作成
+        let croseButtonItem = UIBarButtonItem(title: "閉じる", style: UIBarButtonItem.Style.plain, target: self, action: #selector(croseKeyboard))
+        
+        // "検索"ボタンを作成
+        let searchButtonItem = UIBarButtonItem(title: "検索", style: UIBarButtonItem.Style.plain, target: self, action: #selector(tapSearchButton))
+        
+        // ツールバーにボタンを反映（閉じる, クリア, 翻訳実行）
+        toolbar.setItems([croseButtonItem, flexibleItem, searchButtonItem], animated: true)
+        
+        // ツールバーを反映
+        searchBar.inputAccessoryView = toolbar
     }
     
     
@@ -61,5 +111,18 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
 
+    
+    // MARK: -  検索アクション
+    // キーボード閉じるボタンをタップすると呼ばれる
+    @objc func croseKeyboard() {
+        // キーボードを閉じる
+        self.view.endEditing(true)
+    }
+    
+    // キーボード検索ボタンをタップすると呼ばれる
+    @objc func tapSearchButton() {
+        // キーボードを閉じる
+        self.view.endEditing(true)
+    }
 }
 
