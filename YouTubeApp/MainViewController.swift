@@ -112,7 +112,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func getYoutubeResponse(searchWord: String) {
         
         // 検索URL（qに検索ワード）
-        let searchString = "https://www.googleapis.com/youtube/v3/search?q=\(searchWord)&key=AIzaSyAAMmYlyBkUeVtBpagqXAQoPgOJ9-HAtmg&maxResults=5&part=snippet"
+        let searchString = "https://www.googleapis.com/youtube/v3/search?q=\(searchWord)&key=AIzaSyAAMmYlyBkUeVtBpagqXAQoPgOJ9-HAtmg&maxResults=30&part=snippet"
         
         // 日本語検索を可能に変換
         let encodeString: String = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -134,19 +134,25 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 // JSON解析をおこなう（1スタートは動画のみを取得したいため）
                 for i in 1..<resultJSON["items"].count {
                     
-                    // レスポンス結果のキー値を指定して値を取得
-                    let videoItems = VideoItems(videTitle: resultJSON["items"][i]["snippet"]["title"].string!, videoChannel: resultJSON["items"][i]["snippet"]["channelTitle"].string!, videoImage: resultJSON["items"][i]["snippet"]["thumbnails"]["medium"]["url"].string!, videoID: resultJSON["items"][i]["id"]["videoId"].string!)
-                    
-                    // videoItems型の配列に保管
-                    self.videoItemArray.append(videoItems)
+                    // videoIdが存在する場合のみ値を取得
+                    if resultJSON["items"][i]["id"]["videoId"].string != nil {
+                        
+                        // レスポンス結果のキー値を指定して値を取得
+                        let videoItems = VideoItems(videTitle: resultJSON["items"][i]["snippet"]["title"].string!, videoChannel: resultJSON["items"][i]["snippet"]["channelTitle"].string!, videoImage: resultJSON["items"][i]["snippet"]["thumbnails"]["medium"]["url"].string!, videoID: resultJSON["items"][i]["id"]["videoId"].string!)
+                        
+                        // videoItems型の配列に保管
+                        self.videoItemArray.append(videoItems)
+                        
+                        // tableViewの更新
+                        self.youTubeTable.reloadData()
+                        
+                        // アニメーションの終了
+                        self.animationView.removeFromSuperview()
+                        
+                    } else {
+                        print("videoIdが存在しないのでパス")
+                    }
                 }
-                
-                // tableViewの更新
-                self.youTubeTable.reloadData()
-                
-                // アニメーションの終了
-                self.animationView.removeFromSuperview()
-                
             case .failure(let error):
                 print("error: \(error)")
             }
