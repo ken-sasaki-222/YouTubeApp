@@ -130,9 +130,11 @@
 		45867C142611E21600EFA6A9 /* YouTubeApp */ = {
 			isa = PBXGroup;
 			children = (
-				45867C612612CCB900EFA6A9 /* Model */,
-				45867C632612CCE300EFA6A9 /* View */,
-				45867C622612CCCC00EFA6A9 /* Controller */,
+				45867C1E2611E21A00EFA6A9 /* Assets.xcassets */,
+				45867C1B2611E21600EFA6A9 /* Main.storyboard */,
+				45867C202611E21A00EFA6A9 /* LaunchScreen.storyboard */,
+				45867C762612CF1500EFA6A9 /* VideoItems.swift */,
+				45867C192611E21600EFA6A9 /* MainViewController.swift */,
 				45867C152611E21600EFA6A9 /* AppDelegate.swift */,
 				45867C172611E21600EFA6A9 /* SceneDelegate.swift */,
 				45867C232611E21A00EFA6A9 /* Info.plist */,
@@ -156,32 +158,6 @@
 				45867C392611E21B00EFA6A9 /* Info.plist */,
 			);
 			path = YouTubeAppUITests;
-			sourceTree = "<group>";
-		};
-		45867C612612CCB900EFA6A9 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				45867C762612CF1500EFA6A9 /* VideoItems.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		45867C622612CCCC00EFA6A9 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				45867C192611E21600EFA6A9 /* MainViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		45867C632612CCE300EFA6A9 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				45867C1E2611E21A00EFA6A9 /* Assets.xcassets */,
-				45867C1B2611E21600EFA6A9 /* Main.storyboard */,
-				45867C202611E21A00EFA6A9 /* LaunchScreen.storyboard */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		5184DA0D84161030F3592438 /* Pods */ = {
