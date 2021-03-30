@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E30BF017EA9D488D01D7CFA /* Pods_YouTubeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD15492F1C39F6EE75507273 /* Pods_YouTubeApp.framework */; };
+		4522580C26131B5E0041465E /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4522580B26131B5E0041465E /* WebViewController.swift */; };
 		45867C162611E21600EFA6A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45867C152611E21600EFA6A9 /* AppDelegate.swift */; };
 		45867C182611E21600EFA6A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45867C172611E21600EFA6A9 /* SceneDelegate.swift */; };
 		45867C1A2611E21600EFA6A9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45867C192611E21600EFA6A9 /* MainViewController.swift */; };
@@ -42,6 +43,7 @@
 		0E532B5F8EDF35478A4E346A /* Pods_YouTubeAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YouTubeAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		176D81F006B676BBA9F61774 /* Pods-YouTubeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeApp.release.xcconfig"; path = "Target Support Files/Pods-YouTubeApp/Pods-YouTubeApp.release.xcconfig"; sourceTree = "<group>"; };
 		31C2185F53329A66B96C7889 /* Pods-YouTubeAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTubeAppTests.debug.xcconfig"; path = "Target Support Files/Pods-YouTubeAppTests/Pods-YouTubeAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4522580B26131B5E0041465E /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		45867C122611E21600EFA6A9 /* YouTubeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTubeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45867C152611E21600EFA6A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45867C172611E21600EFA6A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				45867C202611E21A00EFA6A9 /* LaunchScreen.storyboard */,
 				45867C762612CF1500EFA6A9 /* VideoItems.swift */,
 				45867C192611E21600EFA6A9 /* MainViewController.swift */,
+				4522580B26131B5E0041465E /* WebViewController.swift */,
 				45867C152611E21600EFA6A9 /* AppDelegate.swift */,
 				45867C172611E21600EFA6A9 /* SceneDelegate.swift */,
 				45867C232611E21A00EFA6A9 /* Info.plist */,
@@ -414,6 +417,7 @@
 				45867C1A2611E21600EFA6A9 /* MainViewController.swift in Sources */,
 				45867C162611E21600EFA6A9 /* AppDelegate.swift in Sources */,
 				45867C772612CF1500EFA6A9 /* VideoItems.swift in Sources */,
+				4522580C26131B5E0041465E /* WebViewController.swift in Sources */,
 				45867C182611E21600EFA6A9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
