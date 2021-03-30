@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Kingfisher
+import Lottie
 
 // Youtube検索結果を管理するクラス
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
@@ -28,6 +29,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     // レスポンス結果を保存する配列
     var videoItemArray: [VideoItems] = []
     
+    // AnimationViewの宣言
+    var animationView = AnimationView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +62,29 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         // ツールバーを反映
         searchBar.inputAccessoryView = toolbar
     }
+    
+    
+    // MARK: - 検索中アニメーション
+    // Lottieアニメーションの準備
+    func addAnimationView() {
+
+        // アニメーションファイルの指定
+        animationView = AnimationView(name: "検索中")
+
+        // アニメーションの位置指定（画面中央）
+        animationView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
+        
+        // アニメーションビューの背景
+        animationView.backgroundColor = .systemBackground
+
+        // アニメーションのアスペクト比を指定＆ループで開始
+        animationView.contentMode = .scaleAspectFill
+        animationView.loopMode = .loop
+        animationView.play()
+
+        //ViewControllerに配置
+        view.addSubview(animationView)
+    }
 
     
     // MARK: -  検索アクション
@@ -68,6 +94,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // キーボードを閉じる
         searchBar.resignFirstResponder()
+        
+        // 検索中アニメーションの呼び出し
+        addAnimationView()
+        
+        // 検索情報を一度クリアに
+        videoItemArray.removeAll()
         
         // 検索情報
         let searchText = searchBar.text
@@ -80,7 +112,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func getYoutubeResponse(searchWord: String) {
         
         // 検索URL（qに検索ワード）
-        let searchString = "https://www.googleapis.com/youtube/v3/search?q=\(searchWord)&key=AIzaSyAAMmYlyBkUeVtBpagqXAQoPgOJ9-HAtmg&maxResults=30&part=snippet"
+        let searchString = "https://www.googleapis.com/youtube/v3/search?q=\(searchWord)&key=AIzaSyAAMmYlyBkUeVtBpagqXAQoPgOJ9-HAtmg&maxResults=5&part=snippet"
         
         // 日本語検索を可能に変換
         let encodeString: String = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -111,6 +143,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 // tableViewの更新
                 self.youTubeTable.reloadData()
+                
+                // アニメーションの終了
+                self.animationView.removeFromSuperview()
                 
             case .failure(let error):
                 print("error: \(error)")
