@@ -89,7 +89,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let searchURL = URL(string: encodeString)
         
         // Alamofireを用いてAPIにリクエスト
-        AF.request(searchURL as! URLConvertible, method: .get, parameters: nil, encoding: URLEncoding.default).responseJSON {
+        AF.request(searchURL!, method: .get, parameters: nil, encoding: URLEncoding.default).responseJSON {
             (response) in
             
             // 通信の結果で分岐
@@ -99,18 +99,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 // レスポンス結果をJSON型に変換
                 let resultJSON = JSON(response.data as Any)
                 
-                // JSON解析をおこなう
-                for i in 0..<resultJSON["items"].count {
+                // JSON解析をおこなう（1スタートは動画のみを取得したいため）
+                for i in 1..<resultJSON["items"].count {
                     
                     // レスポンス結果のキー値を指定して値を取得
-                    let videoItems = VideoItems(videTitle: resultJSON["items"][i]["snippet"]["title"].string!, videoChannel: resultJSON["items"][i]["snippet"]["channelTitle"].string!, videoImage: resultJSON["items"][i]["snippet"]["thumbnails"]["medium"]["url"].string!)
+                    let videoItems = VideoItems(videTitle: resultJSON["items"][i]["snippet"]["title"].string!, videoChannel: resultJSON["items"][i]["snippet"]["channelTitle"].string!, videoImage: resultJSON["items"][i]["snippet"]["thumbnails"]["medium"]["url"].string!, videoID: resultJSON["items"][i]["id"]["videoId"].string!)
                     
                     // videoItems型の配列に保管
                     self.videoItemArray.append(videoItems)
                 }
-                
-                print("videoItemArray: \(self.videoItemArray)")
-                print("videoItemArray.count: \(self.videoItemArray.count)")
                 
                 // tableViewの更新
                 self.youTubeTable.reloadData()
@@ -183,6 +180,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // タップ時の選択色の常灯を消す
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+        // WebViewControllerのインスタンス作成
+        let webViewController = WebViewController()
+        
+        // モーダルで画面を表示
+        webViewController.modalTransitionStyle = .coverVertical
+        
+        // タップしたセルを検知
+        let tapCell = videoItemArray[indexPath.row]
+        
+        // 検知したセルの動画パラメーターを保存
+        UserDefaults.standard.set(tapCell.videoParams, forKey: "videoParams")
+        
+        // WebViewControllerへ遷移
+        present(webViewController, animated: true)
     }
 }
 
