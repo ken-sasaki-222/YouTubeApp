@@ -79,8 +79,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     // YouTubeAPIと通信を行う
     func getYoutubeResponse(searchWord: String) {
         
-        // 検索URL（q以外は固定値）
-        let searchString = "https://www.googleapis.com/youtube/v3/search?q=\(searchWord)&key=AIzaSyAAMmYlyBkUeVtBpagqXAQoPgOJ9-HAtmg&part=snippet"
+        // 検索URL（qに検索ワード）
+        let searchString = "https://www.googleapis.com/youtube/v3/search?q=\(searchWord)&key=AIzaSyAAMmYlyBkUeVtBpagqXAQoPgOJ9-HAtmg&maxResults=30&part=snippet"
         
         // 日本語検索を可能に変換
         let encodeString: String = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -153,8 +153,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // tableCellのID（youtubeCell）でセルのインスタンスを作成
-        let cell = youTubeTable.dequeueReusableCell(withIdentifier: "youtubeCell",
-                                             for: indexPath)
+        let cell = youTubeTable.dequeueReusableCell(withIdentifier: "youtubeCell", for: indexPath)
         
         // 検索結果のインスタンス
         let searchResults = videoItemArray[indexPath.row]
