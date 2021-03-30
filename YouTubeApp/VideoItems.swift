@@ -13,11 +13,13 @@ struct VideoItems {
     var title       : String
     var channelTitle: String
     var thumbnailURL: String
+    var videoParams : String
     
-    init(videTitle: String, videoChannel: String, videoImage: String) {
+    init(videTitle: String, videoChannel: String, videoImage: String, videoID: String) {
         
         title        = videTitle
         channelTitle = videoChannel
         thumbnailURL = videoImage
+        videoParams  = videoID
     }
 }
