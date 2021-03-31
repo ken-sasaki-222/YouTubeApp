@@ -98,7 +98,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         animationView.backgroundColor = .systemBackground
 
         // アニメーションのアスペクト比を指定＆ループで開始
-        animationView.contentMode = .scaleAspectFill
+        animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
         animationView.play()
 
@@ -166,8 +166,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                         // tableViewの更新
                         self.youTubeTable.reloadData()
                         
-                        // アニメーションの終了
-                        self.animationView.removeFromSuperview()
+                        // 挙動を自然に見せる為時間差でアニメーションを削除
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            // アニメーションの終了
+                            self.animationView.removeFromSuperview()
+                        }
                         
                     } else {
                         print("videoIdが存在しないのでパス")
