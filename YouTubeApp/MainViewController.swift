@@ -5,26 +5,6 @@
 //  Created by 佐々木　謙 on 2021/03/29.
 //
 
-// MARK: - Todo
-
-// ■最低要件
-// YouTube Data APIを用いた動画の検索機能 ✔︎
-// アプリ内での動画再生機能 ✔︎
-
-// ■前提条件
-// OSSの利用OK
-// アーキテクチャの指定ナシ
-
-// ■アプリ構成
-// 検索画面 ✔︎
-// 検索用のテキスト表示領域と、検索結果を表示する領域を確保 ✔︎
-
-// 動画再生画面
-// WebViewでも可 ✔︎
-
-// ■オプション
-// 余力があれば追加機能実装
-
 import UIKit
 import Alamofire
 import SwiftyJSON
@@ -110,7 +90,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: -  検索アクション
     // キーボードの検索ボタンをタップすると呼ばれる
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("検索")
         
         // キーボードを閉じる
         searchBar.resignFirstResponder()
